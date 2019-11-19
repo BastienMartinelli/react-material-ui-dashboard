@@ -32,8 +32,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     justifyContent: "flex-end",
     padding: "0 8px",
-    ...theme.mixins.toolbar,
-    marginBottom: 12
+    ...theme.mixins.toolbar
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -41,12 +40,6 @@ const useStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     })
-  },
-  menuButton: {
-    marginRight: 36
-  },
-  menuButtonHidden: {
-    display: "none"
   },
   title: {
     flexGrow: 1
@@ -66,10 +59,7 @@ const useStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    width: theme.spacing(7),
-    [theme.breakpoints.up("sm")]: {
-      width: theme.spacing(9)
-    }
+    width: theme.spacing(7)
   },
   appBarSpacer: theme.mixins.toolbar,
   content: {
@@ -78,7 +68,7 @@ const useStyles = makeStyles(theme => ({
     overflow: "auto"
   },
   container: {
-    paddingTop: theme.spacing(4),
+    paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(4)
   }
 }));
@@ -97,9 +87,9 @@ export default function DashboardLayout({ children }) {
         className={classes.appBar}
         position="absolute"
         elevation={2}
-        color="inherit"
+        color="primary"
       >
-        <Toolbar>
+        <Toolbar variant="dense">
           <Typography variant="h6" className={classes.title}></Typography>
           <IconButton aria-label="show 4 new mails" color="inherit">
             <Badge badgeContent={4} color="secondary">

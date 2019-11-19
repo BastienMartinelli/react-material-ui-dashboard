@@ -1,6 +1,6 @@
 import React from "react";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import { lightBlue } from "@material-ui/core/colors";
+import { green } from "@material-ui/core/colors";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import DashboardLayout from "./components/DashboardLayout";
@@ -14,7 +14,7 @@ import Ciqual from "./containers/Ciqual";
 const lightTheme = createMuiTheme({
   palette: {
     primary: {
-      main: lightBlue[600]
+      main: green["A400"]
     }
   }
 });
