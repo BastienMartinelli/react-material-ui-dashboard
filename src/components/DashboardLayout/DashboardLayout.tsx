@@ -7,7 +7,7 @@ import Divider from "@material-ui/core/Divider";
 import Container from "@material-ui/core/Container";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import { mainListItems } from "./listItems";
+import NavList from "./NavList";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 
@@ -115,7 +115,7 @@ export default function DashboardLayout({ children }) {
         }}
       >
         <div className={classes.drawerToolbar}></div>
-        {mainListItems}
+        <NavList />
         <div style={{ margin: "auto" }}></div>
         <Divider />
         <ListItem button onClick={toggleDrawer}>

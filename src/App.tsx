@@ -1,6 +1,6 @@
 import React from "react";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import { green } from "@material-ui/core/colors";
+import { green, pink } from "@material-ui/core/colors";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import DashboardLayout from "./components/DashboardLayout";
@@ -15,6 +15,9 @@ const lightTheme = createMuiTheme({
   palette: {
     primary: {
       main: green["A400"]
+    },
+    secondary: {
+      main: pink[500]
     }
   }
 });

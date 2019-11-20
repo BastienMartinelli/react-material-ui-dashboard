@@ -9,7 +9,7 @@ const useStyle = makeStyles({
   header: {
     display: "flex",
     alignItems: "center",
-    marginBottom: 28
+    marginBottom: 20
   },
   separator: {
     flexGrow: 1
