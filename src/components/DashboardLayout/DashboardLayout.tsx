@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
@@ -10,7 +10,6 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import NavList from "./NavList";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-
 import {
   ListItem,
   ListItemIcon,
@@ -18,8 +17,13 @@ import {
   AppBar,
   Toolbar,
   IconButton,
-  Badge
+  Badge,
+  CssBaseline
 } from "@material-ui/core";
+
+import Logo from "../Logo";
+import { lightTheme, darkTheme } from "../../utils/theme";
+import AppStore from "../../store/AppStore";
 
 const drawerWidth = 240;
 
@@ -76,61 +80,70 @@ const useStyles = makeStyles(theme => ({
 export default function DashboardLayout({ children }) {
   const classes = useStyles();
   const [open, setOpen] = useState(true);
+  const { darkMode } = AppStore.useContainer();
 
   const toggleDrawer = () => {
     setOpen(prev => !prev);
   };
 
   return (
-    <div className={classes.root}>
-      <AppBar
-        className={classes.appBar}
-        position="absolute"
-        elevation={2}
-        color="primary"
-      >
-        <Toolbar variant="dense">
-          <Typography variant="h6" className={classes.title}></Typography>
-          <IconButton aria-label="show 4 new mails" color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <MailIcon />
-            </Badge>
-          </IconButton>
-          <IconButton aria-label="show 17 new notifications" color="inherit">
-            <Badge badgeContent={17} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        color="primary"
-        classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose)
-        }}
-        open={open}
-        PaperProps={{
-          elevation: 0
-        }}
-      >
-        <div className={classes.drawerToolbar}></div>
-        <NavList />
-        <div style={{ margin: "auto" }}></div>
-        <Divider />
-        <ListItem button onClick={toggleDrawer}>
-          <ListItemIcon>
-            {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </ListItemIcon>
-          <ListItemText primary="Epingler" />
-        </ListItem>
-      </Drawer>
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="xl" className={classes.container}>
-          {children}
-        </Container>
-      </main>
-    </div>
+    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+      <CssBaseline />
+      <div className={classes.root}>
+        <AppBar
+          className={classes.appBar}
+          position="absolute"
+          elevation={2}
+          color="primary"
+        >
+          <Toolbar variant="dense">
+            <IconButton edge="start" color="inherit" aria-label="menu">
+              <Logo />
+            </IconButton>
+            <Typography variant="h6" className={classes.title}>
+              Nut'ri
+            </Typography>
+            <IconButton aria-label="show 4 new mails" color="inherit">
+              <Badge badgeContent={4} color="secondary">
+                <MailIcon />
+              </Badge>
+            </IconButton>
+            <IconButton aria-label="show 17 new notifications" color="inherit">
+              <Badge badgeContent={17} color="secondary">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          variant="permanent"
+          color="primary"
+          classes={{
+            paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose)
+          }}
+          open={open}
+          PaperProps={{
+            elevation: 0
+          }}
+        >
+          <div className={classes.drawerToolbar}></div>
+          <NavList />
+          <div style={{ margin: "auto" }}></div>
+          <Divider />
+          <ListItem button onClick={toggleDrawer}>
+            <ListItemIcon>
+              {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            </ListItemIcon>
+            <ListItemText primary="Epingler" />
+          </ListItem>
+        </Drawer>
+        <main className={classes.content}>
+          <div className={classes.appBarSpacer} />
+          <Container maxWidth="xl" className={classes.container}>
+            {children}
+          </Container>
+        </main>
+      </div>
+    </ThemeProvider>
   );
 }

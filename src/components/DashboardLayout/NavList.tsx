@@ -11,7 +11,6 @@ import LayersIcon from "@material-ui/icons/Layers";
 import { Divider } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { makeStyles, fade } from "@material-ui/core/styles";
-import { borderColor } from "@material-ui/system";
 
 const useStyles = makeStyles(theme => ({
   buttonActive: {

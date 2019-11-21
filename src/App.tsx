@@ -1,33 +1,18 @@
 import React from "react";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import { green, pink } from "@material-ui/core/colors";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import DashboardLayout from "./components/DashboardLayout";
-import { CssBaseline } from "@material-ui/core";
 import Dashboard from "./containers/Dashboard";
 import Patient from "./containers/Patient";
 import Patients from "./containers/Patients";
 import Settings from "./containers/Settings";
 import Ciqual from "./containers/Ciqual";
-
-const lightTheme = createMuiTheme({
-  palette: {
-    primary: {
-      main: green["A400"]
-    },
-    secondary: {
-      main: pink[500]
-    }
-  }
-});
+import AppStore from "./store/AppStore";
 
 function App() {
   return (
     <Router>
-      <CssBaseline />
-      <ThemeProvider theme={lightTheme}>
-        <CssBaseline />
+      <AppStore.Provider>
         <DashboardLayout>
           <Switch>
             <Route exact path="/">
@@ -47,7 +32,7 @@ function App() {
             </Route>
           </Switch>
         </DashboardLayout>
-      </ThemeProvider>
+      </AppStore.Provider>
     </Router>
   );
 }
