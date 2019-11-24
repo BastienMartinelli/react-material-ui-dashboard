@@ -6,14 +6,17 @@
   "dependencies": {
     "@material-ui/core": "^4.6.1",
     "@material-ui/icons": "^4.5.1",
+    "@material-ui/lab": "^4.0.0-alpha.33",
     "@material-ui/styles": "^4.6.0",
+    "convert-units": "^2.3.4",
     "electron": "^7.1.1",
     "electron-is-dev": "^1.1.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
-    "unstated-next": "^1.1.0"
+    "unstated-next": "^1.1.0",
+    "uuid": "^3.3.3"
   },
   "build": {
     "appId": "some.id.ofyours",
