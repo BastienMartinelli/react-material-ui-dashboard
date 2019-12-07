@@ -1,13 +1,12 @@
 import { createMuiTheme } from "@material-ui/core/styles";
-import { green, pink, teal } from "@material-ui/core/colors";
 
 export const lightTheme = createMuiTheme({
   palette: {
     primary: {
-      main: green["A400"]
+      main: "#4F6294"
     },
     secondary: {
-      main: pink[500]
+      main: "#EF527D"
     }
   }
 });
@@ -15,10 +14,10 @@ export const lightTheme = createMuiTheme({
 export const darkTheme = createMuiTheme({
   palette: {
     primary: {
-      main: teal[700]
+      main: "#4F6294"
     },
     secondary: {
-      main: pink[500]
+      main: "#EF527D"
     },
     type: "dark"
   }

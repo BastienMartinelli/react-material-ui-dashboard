@@ -18,7 +18,7 @@ export default function usePersistedState<T>(
       init.current = true;
       setValue((lastValue as unknown) as T);
     }
-  }, [value]);
+  }, [value, name]);
 
   return [value, setValue];
 }

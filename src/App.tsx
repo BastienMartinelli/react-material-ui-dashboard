@@ -1,42 +1,32 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { ThemeProvider } from "@material-ui/styles";
+import { CssBaseline } from "@material-ui/core";
 
-import DashboardLayout from "./components/DashboardLayout";
-import Dashboard from "./containers/Dashboard";
-import Patient from "./containers/Patient";
-import Patients from "./containers/Patients";
-import Settings from "./containers/Settings";
-import Ciqual from "./containers/Ciqual";
-import AppStore from "./store/AppStore";
-import PatientsStore from "./store/PatientsStore";
+import AppStore from "store/AppStore";
+import PrivateApp from "containers/PrivateApp";
+import SignIn from "containers/SignIn";
+
+import { lightTheme } from "utils/theme";
+import PrivateRoute from "components/PrivateRoute";
 
 function App() {
   return (
-    <Router>
-      <AppStore.Provider>
-        <PatientsStore.Provider>
-          <DashboardLayout>
-            <Switch>
-              <Route exact path="/">
-                <Dashboard />
-              </Route>
-              <Route path="/patient">
-                <Patient />
-              </Route>
-              <Route path="/patients">
-                <Patients />
-              </Route>
-              <Route path="/ciqual">
-                <Ciqual />
-              </Route>
-              <Route path="/settings">
-                <Settings />
-              </Route>
-            </Switch>
-          </DashboardLayout>
-        </PatientsStore.Provider>
-      </AppStore.Provider>
-    </Router>
+    <AppStore.Provider>
+      <ThemeProvider theme={lightTheme}>
+        <CssBaseline />
+        <Router>
+          <Switch>
+            <PrivateRoute loginPath="/auth" exact path="/">
+              <PrivateApp />
+            </PrivateRoute>
+            <Route path="/auth">
+              <SignIn />
+            </Route>
+          </Switch>
+        </Router>
+      </ThemeProvider>
+    </AppStore.Provider>
   );
 }
 
