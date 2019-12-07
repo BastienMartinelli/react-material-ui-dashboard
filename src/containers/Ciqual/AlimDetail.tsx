@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Typography from "@material-ui/core/Typography";
-import { Divider, Paper, Slide } from "@material-ui/core";
+import { Divider, Paper, Slide, Switch } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -22,6 +22,8 @@ const useStyles = makeStyles(theme => ({
 export function AlimDetail({ alimCode }) {
   const classes = useStyles();
   const [aliment, setAliment] = useState();
+  const [filter, setFilter] = useState("");
+  const [noNull, setNoNull] = useState(false);
 
   async function fetchAlimDetail() {
     const result = await getAlimentByCode(alimCode);
@@ -34,18 +36,28 @@ export function AlimDetail({ alimCode }) {
     }
   }, [alimCode]);
 
+  const filteredComp =
+    aliment &&
+    aliment.composition
+      .filter(c => c.constNomFr.toUpperCase().includes(filter.toUpperCase()))
+      .filter(c => (noNull ? c.teneur !== "-" && c.teneur !== "0" : true));
+
   return aliment ? (
     <Slide direction="left" in>
       <Paper>
         <div className={classes.header}>
           <Typography variant="h5">{aliment.alimNomFr}</Typography>
           <div className={classes.separator} />
-          <SearchInput />
+          <Switch checked={noNull} onChange={() => setNoNull(prev => !prev)} />
+          <SearchInput
+            value={filter}
+            onChange={e => setFilter(e.target.value || "")}
+          />
         </div>
         <Divider />
         <List>
-          {aliment &&
-            aliment.composition.map(c => (
+          {filteredComp &&
+            filteredComp.map(c => (
               <ListItem key={c.constCode}>
                 <ListItemText primary={c.constNomFr} secondary={c.teneur} />
               </ListItem>

@@ -4,7 +4,12 @@ import {
   Typography,
   TextField,
   makeStyles,
-  Button
+  Button,
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  FormControlLabel,
+  Radio
 } from "@material-ui/core";
 import PatientsStore from "../../store/PatientsStore";
 
@@ -21,7 +26,7 @@ const useStyles = makeStyles({
   }
 });
 
-function useField(initial: string) {
+function useField(initial: any) {
   const [value, setValue] = useState(initial);
 
   return [
@@ -39,6 +44,7 @@ function NewPatient({ open, onClose }) {
 
   const [firstName, firstNameProps] = useField("");
   const [lastName, lastNameProps] = useField("");
+  const [sexe, sexeProps] = useField(null);
 
   function handleClose() {
     if (onClose) onClose();
@@ -50,7 +56,8 @@ function NewPatient({ open, onClose }) {
 
     addNewPatient({
       firstName: firstName as string,
-      lastName: lastName as string
+      lastName: lastName as string,
+      sexe: sexe as string
     });
 
     handleClose();
@@ -75,6 +82,17 @@ function NewPatient({ open, onClose }) {
           {...lastNameProps}
           fullWidth
         />
+        <FormControl component="fieldset" className={classes.field}>
+          <FormLabel component="legend">Sexe</FormLabel>
+          <RadioGroup aria-label="gender" name="gender1" {...sexeProps}>
+            <FormControlLabel
+              value="female"
+              control={<Radio />}
+              label="Femme"
+            />
+            <FormControlLabel value="male" control={<Radio />} label="Homme" />
+          </RadioGroup>
+        </FormControl>
         <Button
           variant="contained"
           color="primary"

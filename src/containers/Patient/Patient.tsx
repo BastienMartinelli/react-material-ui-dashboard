@@ -13,6 +13,8 @@ import {
 import { makeStyles, fade } from "@material-ui/core/styles";
 import SwapHorizIcon from "@material-ui/icons/SwapHoriz";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import ChangePatient from "./ChangePatient";
+import PatientsStore from "../../store/PatientsStore";
 
 const useStyle = makeStyles(theme => ({
   currentUser: {
@@ -49,22 +51,27 @@ const useStyle = makeStyles(theme => ({
 function Patient() {
   const classes = useStyle();
   const [activeInfo, setActiveInfo] = useState(0);
+  const [showChoose, setShowChoose] = useState(false);
+  const { currentPatient } = PatientsStore.useContainer();
 
   return (
     <>
+      <ChangePatient open={showChoose} onClose={() => setShowChoose(false)} />
       <Typography gutterBottom>Suivi du patient</Typography>
       <div className={classes.currentUser}>
-        <Paper className={classes.userPaper}>
-          <Avatar>BM</Avatar>
-          <Typography className={classes.userName}>
-            Bastien Martinelli
-          </Typography>
-          <IconButton>
-            <MoreVertIcon />
-          </IconButton>
-        </Paper>
+        {currentPatient && (
+          <Paper className={classes.userPaper}>
+            <Avatar>BM</Avatar>
+            <Typography className={classes.userName}>
+              {`${currentPatient.firstName} ${currentPatient.lastName}`}
+            </Typography>
+            <IconButton>
+              <MoreVertIcon />
+            </IconButton>
+          </Paper>
+        )}
         <Tooltip title="Changer de patient">
-          <Fab color="primary" size="small">
+          <Fab color="primary" size="small" onClick={() => setShowChoose(true)}>
             <SwapHorizIcon />
           </Fab>
         </Tooltip>

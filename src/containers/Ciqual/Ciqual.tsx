@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Typography from "@material-ui/core/Typography";
-import { Grid, Paper, ListSubheader, Divider } from "@material-ui/core";
+import { Grid, Paper, ListSubheader } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -35,9 +35,7 @@ const useStyles = makeStyles({
     marginTop: 8,
     marginRight: 8
   },
-  paper: {
-    height: "100%"
-  }
+  paper: {}
 });
 
 export function Menu() {

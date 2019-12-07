@@ -59,7 +59,7 @@ export default function NavList() {
         <ListItemIcon>
           <PeopleIcon />
         </ListItemIcon>
-        <ListItemText primary="Tout mes patients" />
+        <ListItemText primary="Tous mes patients" />
       </Item>
       <Divider />
       <Item to="/ciqual">

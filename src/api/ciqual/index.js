@@ -1,46 +1,7 @@
 import convert from "convert-units";
-import d from "./ciqual.json";
+import data from "./ciqual.json";
 
-type CiqualData = {
-  aliments: Alim[];
-  compositions: Compo[];
-  constants: Const[];
-};
-
-type Alim = {
-  alimCode: string;
-  alimGrpCode: string;
-  alimNomEng: string;
-  alimNomFr: string;
-  alimNomIndexEng: string;
-  alimNomIndexFr: string;
-  alimSsgrpCode: string;
-  alimSsssgrpCode: string;
-};
-
-type Compo = {
-  alimCode: string;
-  codeConfiance: string;
-  constCode: string;
-  max: any;
-  min: any;
-  sourceCode: any;
-  teneur: string;
-};
-
-type Const = {
-  constCode: string;
-  constNomEng: string;
-  constNomFr: string;
-};
-
-type Aliment = Alim & {
-  composition: (Compo | Const)[];
-};
-
-const data = d as CiqualData;
-
-function calcTeneur(value: string, teneur = "", unit = "g") {
+function calcTeneur(value, teneur = "", unit = "g") {
   const covertedValue = convert(value)
     .from(unit)
     .to("g");
@@ -52,8 +13,8 @@ function calcTeneur(value: string, teneur = "", unit = "g") {
   return result.toString();
 }
 
-export function getAlimentsByName(name: string, length: number) {
-  return new Promise<Alim[]>(resolve => {
+export function getAlimentsByName(name, length) {
+  return new Promise(resolve => {
     const alims = data.aliments.filter(
       a =>
         a.alimNomFr.toUpperCase().includes(name.toUpperCase()) ||
@@ -66,8 +27,8 @@ export function getAlimentsByName(name: string, length: number) {
   });
 }
 
-export function getAlimentByCode(code: string) {
-  return new Promise<Aliment>(resolve => {
+export function getAlimentByCode(code) {
+  return new Promise(resolve => {
     const alim = data.aliments.find(a => a.alimCode === code);
 
     if (!alim) {
@@ -87,12 +48,8 @@ export function getAlimentByCode(code: string) {
   });
 }
 
-export function getCompositionByAlimentId(
-  alimCode: string,
-  value?: string,
-  unit?: string
-) {
-  return new Promise<(Compo | Const)[]>(resolve => {
+export function getCompositionByAlimentId(alimCode, value, unit) {
+  return new Promise(resolve => {
     const result = data.compositions
       .filter(c => c.alimCode === alimCode)
       .map(c => {
