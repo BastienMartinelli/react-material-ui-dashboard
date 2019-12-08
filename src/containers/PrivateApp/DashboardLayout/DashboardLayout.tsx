@@ -10,6 +10,7 @@ import NavList from "./NavList";
 import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 
 import AppBar from "./AppBar";
+import { useTranslation } from "react-i18next";
 
 const drawerWidth = 240;
 
@@ -55,6 +56,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function DashboardLayout({ children }) {
   const classes = useStyles();
+  const { t } = useTranslation();
   const [open, setOpen] = useState(true);
 
   const toggleDrawer = () => {
@@ -83,7 +85,7 @@ export default function DashboardLayout({ children }) {
           <ListItemIcon>
             {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </ListItemIcon>
-          <ListItemText primary="Epingler" />
+          <ListItemText primary={t("menu.dock")} />
         </ListItem>
       </Drawer>
       <main className={classes.content}>

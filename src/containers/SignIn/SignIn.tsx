@@ -111,7 +111,6 @@ export default function SignIn() {
               <Form className={classes.form} noValidate>
                 <MuiFIeld
                   comp={TextField}
-                  variant="outlined"
                   margin="normal"
                   required
                   fullWidth
@@ -123,7 +122,6 @@ export default function SignIn() {
                 />
                 <MuiFIeld
                   comp={TextField}
-                  variant="outlined"
                   margin="normal"
                   required
                   fullWidth

@@ -2,6 +2,7 @@ import React from "react";
 import { InputBase } from "@material-ui/core";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles(theme => ({
   search: {
@@ -46,6 +47,7 @@ const useStyles = makeStyles(theme => ({
 
 export function SearchInput(props) {
   const classes = useStyles();
+  const { t } = useTranslation();
 
   return (
     <div className={classes.search}>
@@ -53,7 +55,7 @@ export function SearchInput(props) {
         <SearchIcon />
       </div>
       <InputBase
-        placeholder="Search…"
+        placeholder={`${t("search")}...`}
         classes={{
           root: classes.inputRoot,
           input: classes.inputInput

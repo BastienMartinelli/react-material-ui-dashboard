@@ -7,6 +7,7 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import BuildIcon from "@material-ui/icons/Build";
 import { Link } from "react-router-dom";
 import { makeStyles, fade } from "@material-ui/core/styles";
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles(theme => ({
   buttonActive: {
@@ -36,19 +37,21 @@ function Item({ children, to }) {
 }
 
 export default function NavList() {
+  const { t } = useTranslation();
+
   return (
     <>
       <Item to="/">
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
-        <ListItemText primary="Dashboard" />
+        <ListItemText primary={t("menu.dashboard")} />
       </Item>
       <Item to="/settings">
         <ListItemIcon>
           <BuildIcon />
         </ListItemIcon>
-        <ListItemText primary="Configuration" />
+        <ListItemText primary={t("menu.settings")} />
       </Item>
     </>
   );

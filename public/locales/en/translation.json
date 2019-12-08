@@ -1,5 +1,14 @@
 {
   "required": "Field required",
+  "search": "Search",
+  "menu": {
+    "account": "Account",
+    "profile": "Profile",
+    "logout": "Logout",
+    "settings": "Settings",
+    "dashboard": "Dasboard",
+    "dock": "Dock"
+  },
   "signin": {
     "title": "Sign In",
     "submit": "Sign In",
@@ -11,5 +20,9 @@
     "invalid": {
       "email": "Invalid email"
     }
+  },
+  "settings": {
+    "title": "Application settings",
+    "darktheme": "Night theme"
   }
 }

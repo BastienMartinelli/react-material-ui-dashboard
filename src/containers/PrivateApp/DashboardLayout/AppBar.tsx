@@ -16,6 +16,7 @@ import Logo from "components/Logo";
 import AppStore from "store/AppStore";
 
 import InnerSearchInput from "components/InnerSearchInput";
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -35,6 +36,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Bar() {
   const classes = useStyles();
+  const { t } = useTranslation();
   const [showAccount, setShowAccount] = useState(false);
   const anchorRef = useRef(null);
   const { setUser } = AppStore.useContainer();
@@ -84,9 +86,9 @@ export default function Bar() {
           open={showAccount}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>My account</MenuItem>
-          <MenuItem onClick={logout}>Logout</MenuItem>
+          <MenuItem onClick={handleClose}>{t("menu.profile")}</MenuItem>
+          <MenuItem onClick={handleClose}>{t("menu.account")}</MenuItem>
+          <MenuItem onClick={logout}>{t("menu.logout")}</MenuItem>
         </Menu>
       </Toolbar>
     </AppBar>

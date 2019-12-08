@@ -1,5 +1,14 @@
 {
   "required": "Ce champ est requis",
+  "search": "Rechercher",
+  "menu": {
+    "account": "Mon Compte",
+    "profile": "Mon Profil",
+    "logout": "Déconnexion",
+    "settings": "Paramètres",
+    "dashboard": "Dashboard",
+    "dock": "Epingler"
+  },
   "signin": {
     "title": "Se connecter",
     "submit": "Se connecter",
@@ -11,5 +20,9 @@
     "invalid": {
       "email": "Adresse email invalide"
     }
+  },
+  "settings": {
+    "title": "Paramètres de l'applications",
+    "darktheme": "Thème nuit"
   }
 }
