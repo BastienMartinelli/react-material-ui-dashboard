@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Redirect } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
@@ -14,7 +12,22 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import AppStore from "store/AppStore";
-import { Slide } from "@material-ui/core";
+import { Slide, TextField } from "@material-ui/core";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+
+import { MuiFIeld, SubmitButton } from "components/form";
+
+const SignupSchema = Yup.object().shape({
+  email: Yup.string()
+    .email("Invalid email")
+    .required("Required"),
+  password: Yup.string()
+    .min(4, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Required"),
+  remember: Yup.boolean()
+});
 
 function Copyright() {
   return (
@@ -30,7 +43,7 @@ function Copyright() {
 }
 
 const IMAGE_URL =
-  "https://images.unsplash.com/photo-1510146758428-e5e4b17b8b6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80";
+  "https://images.unsplash.com/photo-1519309621146-2a47d1f7103a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1353&q=80";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -65,31 +78,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function useField<T>() {
-  const [value, setValue] = useState<T>();
-
-  return {
-    onChange: e => setValue(e.target.value),
-    value: value || ""
-  };
-}
-
 export default function SignIn() {
   const classes = useStyles();
-  const nameField = useField<string>();
-  const passwordField = useField<string>();
   const { user, setUser } = AppStore.useContainer();
 
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    if (nameField.value && passwordField.value) {
-      setUser({
-        userName: nameField.value,
-        token: "",
-        email: ""
-      });
-    }
+  async function handleSubmit(values) {
+    await new Promise(res => setTimeout(() => res(), 2000));
+    setUser(values);
   }
 
   return (
@@ -106,60 +101,75 @@ export default function SignIn() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <form className={classes.form} noValidate onSubmit={handleSubmit}>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                {...nameField}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                {...passwordField}
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-              >
-                Sign In
-              </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
+            <Formik
+              initialValues={{
+                email: "",
+                password: "",
+                remember: ""
+              }}
+              validationSchema={SignupSchema}
+              onSubmit={handleSubmit}
+            >
+              <Form className={classes.form} noValidate>
+                <MuiFIeld
+                  comp={TextField}
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  autoFocus
+                />
+                <MuiFIeld
+                  comp={TextField}
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      name="remember"
+                      value="remember"
+                      color="primary"
+                    />
+                  }
+                  label="Remember me"
+                />
+                <SubmitButton
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                >
+                  Sign In
+                </SubmitButton>
+                <Grid container>
+                  <Grid item xs>
+                    <Link href="#" variant="body2">
+                      Forgot password?
+                    </Link>
+                  </Grid>
+                  <Grid item>
+                    <Link href="#" variant="body2">
+                      {"Don't have an account? Sign Up"}
+                    </Link>
+                  </Grid>
                 </Grid>
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-              </Grid>
-              <Box mt={5}>
-                <Copyright />
-              </Box>
-            </form>
+                <Box mt={5}>
+                  <Copyright />
+                </Box>
+              </Form>
+            </Formik>
           </div>
         </Grid>
       </Grid>
