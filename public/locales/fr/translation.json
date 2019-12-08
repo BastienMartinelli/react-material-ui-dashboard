@@ -1,0 +1,15 @@
+{
+  "required": "Ce champ est requis",
+  "signin": {
+    "title": "Se connecter",
+    "submit": "Se connecter",
+    "forgotpassword": "Mot de passe oublié ?",
+    "signup": "Pas encore de compte ? S'incrire.",
+    "email": "Adresse email",
+    "password": "Mot de passe",
+    "remember": "Se souvenir de moi",
+    "invalid": {
+      "email": "Adresse email invalide"
+    }
+  }
+}

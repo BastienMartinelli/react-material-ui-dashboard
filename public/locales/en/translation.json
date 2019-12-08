@@ -1,0 +1,15 @@
+{
+  "required": "Field required",
+  "signin": {
+    "title": "Sign In",
+    "submit": "Sign In",
+    "forgotpassword": "Forgot password ?",
+    "signup": "Don't have an account ? Sign Up.",
+    "email": "Email Address",
+    "password": "Password",
+    "remember": "Remember me",
+    "invalid": {
+      "email": "Invalid email"
+    }
+  }
+}
