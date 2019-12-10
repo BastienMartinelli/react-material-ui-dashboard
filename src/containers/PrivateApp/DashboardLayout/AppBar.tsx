@@ -31,6 +31,9 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1
+  },
+  searchInput: {
+    marginRight: 8
   }
 }));
 
@@ -63,7 +66,7 @@ export default function Bar() {
         <Typography variant="h6" className={classes.title}>
           My App
         </Typography>
-        <InnerSearchInput />
+        <InnerSearchInput className={classes.searchInput} />
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
             <MailIcon />

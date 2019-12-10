@@ -3,14 +3,15 @@ import { InputBase } from "@material-ui/core";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import { useTranslation } from "react-i18next";
+import clsx from "clsx";
 
 const useStyles = makeStyles(theme => ({
   search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.primary.light, 0.3),
+    backgroundColor: fade(theme.palette.primary.light, 0.6),
     "&:hover": {
-      backgroundColor: fade(theme.palette.primary.light, 0.5)
+      backgroundColor: fade(theme.palette.primary.light, 0.8)
     },
     marginLeft: 0,
     width: "100%",
@@ -45,17 +46,24 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export function SearchInput(props) {
+type InnerSearchInputProps = {
+  className?: string;
+  style?: React.CSSProperties;
+} & React.ComponentProps<typeof InputBase>;
+
+export function SearchInput(props: InnerSearchInputProps) {
+  const { className, style, placeholder } = props;
+
   const classes = useStyles();
   const { t } = useTranslation();
 
   return (
-    <div className={classes.search}>
+    <div className={clsx(classes.search, className)} style={style}>
       <div className={classes.searchIcon}>
         <SearchIcon />
       </div>
       <InputBase
-        placeholder={`${t("search")}...`}
+        placeholder={`${t("search")}...` || placeholder}
         classes={{
           root: classes.inputRoot,
           input: classes.inputInput

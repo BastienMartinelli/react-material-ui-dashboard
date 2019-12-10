@@ -11,13 +11,14 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import AppStore from "store/AppStore";
 import { Slide, TextField, Fade } from "@material-ui/core";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-
-import { MuiFIeld, SubmitButton } from "components/form";
 import { useTranslation } from "react-i18next";
+
+import AppStore from "store/AppStore";
+import { MuiFIeld, SubmitButton } from "components/form";
+import teamImage from "img/team.svg";
 
 function Copyright() {
   return (
@@ -32,22 +33,17 @@ function Copyright() {
   );
 }
 
-const IMAGE_URL =
-  "https://images.unsplash.com/photo-1519309621146-2a47d1f7103a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1353&q=80";
-
 const useStyles = makeStyles(theme => ({
   root: {
     height: "100vh"
   },
   image: {
-    backgroundImage: `url(${IMAGE_URL})`,
+    backgroundImage: `url(${teamImage})`,
     backgroundRepeat: "no-repeat",
-    backgroundColor:
-      theme.palette.type === "dark"
-        ? theme.palette.grey[900]
-        : theme.palette.grey[50],
-    backgroundSize: "cover",
-    backgroundPosition: "center"
+
+    backgroundSize: "contain",
+    backgroundPosition: "center",
+    margin: 36
   },
   paper: {
     margin: theme.spacing(8, 4),
@@ -57,7 +53,8 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
+    color: "white"
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -65,6 +62,9 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
+  },
+  rememberMe: {
+    marginTop: 16
   }
 }));
 
@@ -88,13 +88,13 @@ export default function SignIn() {
 
   return (
     <Grid container component="main" className={classes.root}>
-      {user && <Redirect exact to="/" />}
+      {user && <Redirect exact to="/private" />}
       <CssBaseline />
       <Slide in direction="right">
         <Grid item xs={12} sm={8} md={4} component={Paper} elevation={6} square>
           <div className={classes.paper}>
             <Avatar className={classes.avatar}>
-              <LockOutlinedIcon />
+              <LockOutlinedIcon color="inherit" />
             </Avatar>
             <Typography component="h1" variant="h5">
               {t("signin.title")}
@@ -140,6 +140,7 @@ export default function SignIn() {
                     />
                   }
                   label={t("signin.remember")}
+                  className={classes.rememberMe}
                 />
                 <SubmitButton
                   fullWidth
@@ -170,7 +171,7 @@ export default function SignIn() {
         </Grid>
       </Slide>
       <Fade timeout={200} in>
-        <Grid item xs={false} sm={4} md={8} className={classes.image} />
+        <Grid item xs={false} sm={3} md={7} className={classes.image} />
       </Fade>
     </Grid>
   );
