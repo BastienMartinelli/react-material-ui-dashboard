@@ -40,7 +40,6 @@ const useStyles = makeStyles(theme => ({
   image: {
     backgroundImage: `url(${teamImage})`,
     backgroundRepeat: "no-repeat",
-
     backgroundSize: "contain",
     backgroundPosition: "center",
     margin: 36
@@ -112,6 +111,7 @@ export default function SignIn() {
                 <MuiFIeld
                   comp={TextField}
                   margin="normal"
+                  variant="outlined"
                   required
                   fullWidth
                   id="email"
@@ -123,6 +123,7 @@ export default function SignIn() {
                 <MuiFIeld
                   comp={TextField}
                   margin="normal"
+                  variant="outlined"
                   required
                   fullWidth
                   name="password"
