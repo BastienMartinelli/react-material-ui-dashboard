@@ -4,13 +4,13 @@ import { teal, pink } from "@material-ui/core/colors";
 export const lightTheme = createMuiTheme({
   palette: {
     primary: {
-      main: teal[400]
+      main: "#575A89"
     },
     secondary: {
-      main: pink[300]
+      main: pink[500]
     },
     error: {
-      main: pink[300]
+      main: pink[500]
     }
   }
 });
@@ -18,13 +18,13 @@ export const lightTheme = createMuiTheme({
 export const darkTheme = createMuiTheme({
   palette: {
     primary: {
-      main: teal[600]
+      main: "#575A89"
     },
     secondary: {
-      main: pink[300]
+      main: pink[500]
     },
     error: {
-      main: pink[300]
+      main: pink[500]
     },
     type: "dark"
   }
